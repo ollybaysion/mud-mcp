@@ -1,0 +1,60 @@
+# Curated metadata layered on top of extracted catalog nodes.
+#
+# `nodes`:
+#   <NodeName>:
+#     summary: one-line description for LLM
+#     importance: critical | high | normal | low
+#     tags: [free-form labels]
+#
+# `extra_edges`: relationships the extractor cannot infer from code alone.
+
+nodes:
+  TrendController:
+    summary: "트렌드 목록·상세·통계 REST API 진입점"
+    importance: high
+    tags: [api, trend]
+
+  TrendService:
+    summary: "트렌드 검색·필터링·집계의 중심 서비스"
+    importance: critical
+    tags: [core, trend]
+
+  AnalysisService:
+    summary: "수집된 트렌드 항목을 LLM으로 점수·요약·딥분석하는 파이프라인"
+    importance: critical
+    tags: [core, llm, analysis]
+
+  DigestService:
+    summary: "일일 다이제스트 생성·구독자 발송"
+    importance: high
+    tags: [digest, email]
+
+  CrawlerBase:
+    summary: "모든 크롤러의 베이스. 재시도·rate limit·중복 제거 공통 로직 포함"
+    importance: critical
+    tags: [crawler, base]
+
+  HackerNewsCrawler:
+    summary: "HN top stories를 정기 수집"
+    tags: [crawler, en, hn]
+
+  GeekNewsCrawler:
+    summary: "GeekNews(news.hada.io) RSS 수집"
+    tags: [crawler, ko]
+
+  TrendItem:
+    summary: "수집된 트렌드 1건의 단위 엔티티. 본문·점수·딥분석 필드 포함"
+    importance: critical
+    tags: [domain]
+
+  DailyDigest:
+    summary: "일일 큐레이션 다이제스트 단위"
+    tags: [domain, digest]
+
+extra_edges:
+  # 코드에서 자동 추출 불가능한 도메인 관계는 여기에.
+  # 예: 스케줄러 잡과 서비스 사이 관계
+  # - from: DailyDigestJob
+  #   to: DigestService
+  #   type: TRIGGERS
+  #   note: "1일 1회 다이제스트 생성 트리거"

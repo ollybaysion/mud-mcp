@@ -132,6 +132,20 @@ Call `catalog_status` in MCP Inspector to verify the connection. Until ingest is
 - `.git`, `node_modules`, `build`, `.next`, `.gradle`, `.env*` are blocked from `read_file`.
 - The server is read-only — no write tools are exposed.
 
+## Ingest (Python) — catalog graph
+
+The MCP server's graph tools (e.g. `catalog_status`, future `find_code` / `related`) are backed by a Neo4j catalog populated by a separate Python pipeline under [`ingest/`](./ingest/README.md).
+
+```bash
+cd ingest
+uv pip install -e .
+python -m catalog init-schema    # one-time
+python -m catalog ingest         # extract → transform → load
+python -m catalog status
+```
+
+See [`ingest/README.md`](./ingest/README.md) for full details. The MCP server stays read-only against the graph; ingest is the only writer.
+
 ## Publishing
 
 ```bash

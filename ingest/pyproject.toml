@@ -1,0 +1,24 @@
+[project]
+name = "mud-catalog"
+version = "0.1.0"
+description = "Ingest mud codebase into a Neo4j catalog graph for mud-mcp"
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j>=5.27.0",
+    "javalang>=0.13.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.5.0",
+    "pyyaml>=6.0.2",
+    "typer>=0.13.0",
+    "rich>=13.9.0",
+]
+
+[project.scripts]
+mud-catalog = "catalog.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["catalog*"]

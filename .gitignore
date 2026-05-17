@@ -4,3 +4,13 @@ dist/
 .DS_Store
 .env
 .env.local
+
+# Python (ingest/)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
